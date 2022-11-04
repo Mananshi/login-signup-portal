@@ -1,5 +1,5 @@
 // send 201 response with the message
-export const created = function(req, res, next) {
+const created = function(req, res, next) {
     res.created = function(message) {
       let data =
         typeof message === 'object'
@@ -13,7 +13,7 @@ export const created = function(req, res, next) {
   }
   
   // send 200 response
-  export const ok = function(req, res, next) {
+ const ok = function(req, res, next) {
     res.ok = function(message) {
       let data =
         typeof message === 'object'
@@ -28,7 +28,7 @@ export const created = function(req, res, next) {
   }
   
   // send 400 error -  either db created or validator error
-  export const error = function(req, res, next) {
+  const error = function(req, res, next) {
     res.error = function(message) {
       let data =
         typeof message === 'object'
@@ -42,7 +42,7 @@ export const created = function(req, res, next) {
   }
   
   // send 401 error -  unauthorized access
-  export const unauthorized = function(req, res, next) {
+  const unauthorized = function(req, res, next) {
     res.unauthorized = function(message) {
       const data = { error: message || 'Unauthorized access' }
       return res.status(401).json({
@@ -54,7 +54,7 @@ export const created = function(req, res, next) {
   }
   
   // send 409 error -  conflict
-  export const conflict = function(req, res, next) {
+  const conflict = function(req, res, next) {
     res.conflict = function(message) {
       const data = { error: message }
       return res.status(409).json({ success: false, data })
@@ -63,7 +63,7 @@ export const created = function(req, res, next) {
   }
   
   // send 403 error -  forbidden
-  export const forbidden = function(req, res, next) {
+  const forbidden = function(req, res, next) {
     res.forbidden = function(message) {
       let data =
         typeof message === 'object'
@@ -75,3 +75,5 @@ export const created = function(req, res, next) {
     }
     next()
   }
+
+  module.exports = { created, ok, error, unauthorized, conflict, forbidden }

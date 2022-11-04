@@ -1,7 +1,7 @@
-import { compareHash, generateJWTToken, verifyJWTToken } from './auth'
-import { authSchema } from './validation'
+const { compareHash, generateJWTToken, verifyJWTToken } = require('./auth.js')
+const { authSchema } = require('./validation.js')
 
-export const login = async (req, res) => {
+const login = async (req, res) => {
   try {
     await authSchema.validateAsync(req.body)
 
@@ -27,7 +27,7 @@ export const login = async (req, res) => {
   }
 }
 
-export const protect = async (req, res, next) => {
+const protect = async (req, res, next) => {
   const bearer = req.headers.authorization || req.headers.Authorization
   if (!bearer || !bearer.startsWith('Bearer ')) {
     return res.unauthorized()
@@ -50,3 +50,5 @@ export const protect = async (req, res, next) => {
   req.user = user
   next()
 }
+
+module.exports = { login, protect }

@@ -1,9 +1,9 @@
-import jwt from 'jsonwebtoken'
+const jwt = require('jsonwebtoken')
 
 const bcrypt = require('bcrypt')
 
 // hash password
-export const hashText = async text => {
+const hashText = async text => {
   try {
     const saltRounds = 10
     const hash = await bcrypt.hash(text, saltRounds)
@@ -14,7 +14,7 @@ export const hashText = async text => {
 }
 
 // compare hash
-export const compareHash = async (text, hash) => {
+const compareHash = async (text, hash) => {
   try {
     const match = await bcrypt.compare(text, hash)
     return match
@@ -23,7 +23,7 @@ export const compareHash = async (text, hash) => {
   }
 }
 
-export const generateJWTToken = async obj => {
+const generateJWTToken = async obj => {
   return (
     'Bearer ' +
     jwt.sign(obj, process.env.SECRETS.JWT, {
@@ -32,7 +32,7 @@ export const generateJWTToken = async obj => {
   )
 }
 
-export const verifyJWTToken = token => {
+const verifyJWTToken = token => {
   try {
     return jwt.verify(token, process.env.SECRETS.JWT)
   } catch (error) {
@@ -40,3 +40,5 @@ export const verifyJWTToken = token => {
     return false
   }
 }
+
+module.exports = { hashText, compareHash, generateJWTToken, verifyJWTToken }

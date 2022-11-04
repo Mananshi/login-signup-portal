@@ -1,9 +1,9 @@
-import { PrismaClient } from '@prisma/client'
-import { hashText } from '../../utils/utils'
+const { PrismaClient } = require('@prisma/client')
+const { hashText } = require('../../utils/auth.js')
 
 const db = new PrismaClient()
 
-export const signup = async (req, res) => {
+const signup = async (req, res) => {
     try {
       let { email, name, password } = req.body
       // // check if email address is alreay registered
@@ -32,3 +32,5 @@ export const signup = async (req, res) => {
   //   const users = await db.user.findMany({})
   //   res.ok(users)
   // }
+
+  module.exports = { signup }

@@ -1,17 +1,17 @@
-import express, { Router } from "express"
-import cors from 'cors'
-import helmet from 'helmet'
-import morgan from 'morgan'
-import {login, protect} from './utils/auth'
-import {
+const express = require('express')
+const cors = require('cors')
+const helmet = require('helmet')
+const morgan = require('morgan')
+const {login, protect} = require( './utils/utils.js')
+const {
     created,
     error,
     unauthorized,
     ok,
     conflict,
     forbidden
-} from './utils/express-helper'
-import { signup } from './services/user/user.controller'
+} = require('./utils/express-helper.js')
+const { signup } = require('./services/user/user.controller.js')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -22,7 +22,7 @@ app.use(morgan('dev'))
 // security guard
 app.use(helmet())
 
-const router= Router()
+const router= express.Router()
 router.use(created, error, unauthorized, ok, conflict, forbidden)
 app.use(created, error, unauthorized, ok, conflict, forbidden)
 
