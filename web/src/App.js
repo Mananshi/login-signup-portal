@@ -1,21 +1,36 @@
-import React, { useState } from "react";
-import './App.css';
+import React, { useEffect, useState } from "react";
+import {
+  Routes,
+  Route,
+  useNavigate,
+  useLocation
+} from "react-router-dom";
+import Home from "./components/Home";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 
-function App() {
-  const [currentForm, setCurrentForm] = useState('login');
 
-  const toggleForm = (formName) => {
-    setCurrentForm(formName);
-  }
+function App() {
+  const location = useLocation();
+  const [loggedIn, setloggedIn] = useState(false)
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (localStorage.getItem("user")) {
+      setloggedIn(true)
+      navigate("/home")
+    }
+    // eslint-disable-next-line
+  }, [])
 
   return (
-    <div className="App">
-      {
-        currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} />
-      }
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Login loggedIn={loggedIn} setloggedIn={setloggedIn} />} />
+        <Route path="/register" element={<Register loggedIn={loggedIn} setloggedIn={setloggedIn} />} />
+        <Route path="/home" element={<Home loggedIn={loggedIn} setloggedIn={setloggedIn} />} />
+      </Routes>
+    </>
   );
 }
 
