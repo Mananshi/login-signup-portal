@@ -53,7 +53,7 @@ export const Register = ({ loggedIn, setloggedIn }) => {
                 }
             })
             const response = await res.json()
-            if (response.token) {
+            if (response) {
                 localStorage.setItem("user", JSON.stringify(response))
                 setloggedIn(true)
                 setvisible(false)
@@ -68,7 +68,7 @@ export const Register = ({ loggedIn, setloggedIn }) => {
                     theme: 'colored'
                 });
                 setTimeout(() => {
-                    navigate("/home")
+                    navigate("/")
                 }, 1000);
             } else {
                 setvisible(false)

@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Routes,
   Route,
-  useNavigate,
-  useLocation
+  useNavigate
 } from "react-router-dom";
 import Home from "./components/Home";
 import { Login } from "./components/Login";
@@ -11,7 +10,6 @@ import { Register } from "./components/Register";
 
 
 function App() {
-  const location = useLocation();
   const [loggedIn, setloggedIn] = useState(false)
   const navigate = useNavigate()
 
