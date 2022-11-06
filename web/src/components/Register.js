@@ -53,7 +53,7 @@ export const Register = ({ loggedIn, setloggedIn }) => {
                 }
             })
             const response = await res.json()
-            if (response) {
+            if (response.message === 'Account created') {
                 localStorage.setItem("user", JSON.stringify(response))
                 setloggedIn(true)
                 setvisible(false)
